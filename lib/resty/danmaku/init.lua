@@ -1,5 +1,5 @@
 local subscriber = require "resty.danmaku.subscriber"
-local boradcaster = require "resty.danmaku.broadcaster"
+local boradcaster = require "resty.danmaku.boardcaster"
 local util = require "resty.danmaku.util"
 
 local _M = util.new_tab(0, 3)
@@ -13,8 +13,8 @@ function _M.run()
     -- check if broadcast is running
     local br = util.get_broadcaster(liveid)
     if not br then
-        -- initialize new broadcaster instance
-        ngx.log(ngx.ERR, "initializing new broadcaster ", liveid)
+        -- initialize new boardcaster instance
+        ngx.log(ngx.ERR, "initializing new boardcaster ", liveid)
         br = boradcaster:new({liveid = liveid})
         ngx.thread.spawn(br.run, br)
     end
